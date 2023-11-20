@@ -1,24 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import GlobalStyle from "./GlobalStyle";
+import Tab from "./Tab";
 
 function App() {
+  const [activeTab, setActiveTab] = useState("artist");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Router>
+      <GlobalStyle />
+      <div>
+        <Tab
+          active={activeTab === "artist"}
+          onClick={() => setActiveTab("artist")}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          Artist
+        </Tab>
+        <Tab
+          active={activeTab === "album"}
+          onClick={() => setActiveTab("album")}
+        >
+          Album
+        </Tab>
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/detail" element={<Detail />} />
+      </Routes>
+    </Router>
+  );
+}
+
+import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Detail from "./pages/Detail";
+import GlobalStyle from "./GlobalStyle";
+import Tab from "./Tab";
+import Header from "./Header";
+import Banner from "./Banner";
+
+function App() {
+  const [activeTab, setActiveTab] = useState("artist");
+
+  return (
+    <Router>
+      <GlobalStyle />
+      <Header />
+      <Banner />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/detail" element={<Detail />} />
+      </Routes>
+    </Router>
   );
 }
 
